@@ -1,0 +1,103 @@
+$border: 1px solid rgb(235, 235, 235);
+
+#project-launched-box {
+  background-color: #034752;
+  color: white;
+  width: 600px;
+  height: 160px;
+  margin: auto;
+  padding-top: 40px;
+  #created-at {
+    display: flex;
+    justify-content: center;
+    font-weight: normal;
+    align-items: center;
+  }
+  #project-launched {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: normal;
+    align-items: center; 
+  }
+
+}
+
+.update-list-item {
+  padding-bottom: 7%;
+  .update-list-item-right {
+    text-align: left;
+    margin-left: 50%;
+    padding-left: 7%;
+  }
+  .update-list-item-left {
+    text-align: right;
+    margin-right: 50%;
+    padding-right: 7%;
+  }
+  .update-date-right {
+    text-align: left;
+    border-bottom: $border;
+    margin-left: 50%;
+  }
+  .update-date-left {
+    text-align: right;
+    border-bottom: $border;
+    margin-right: 50%;
+  }
+  .likes-comments {
+    padding-top: 5%;
+  }
+  .read-more {
+    text-decoration: underline;
+  }
+  .container {
+    width: 90%
+  }
+  .update-title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+
+.update-list-item-right:hover {
+  .update-title-color-1 {
+    background-color: rgb(94, 250, 190);
+  }
+  .update-title-color-2 {
+    background-color: rgb(255, 191, 107);
+  }
+  .update-title-color-3 {
+    background-color: rgb(117, 154, 255);
+  }
+}
+
+.update-list-item-left:hover {
+  .update-title-color-1 {
+    background-color: rgb(94, 250, 190);
+  }
+  .update-title-color-2 {
+    background-color: rgb(255, 191, 107);
+  }
+  .update-title-color-3 {
+    background-color: rgb(117, 154, 255);
+  }
+}
+
+#update-feed {
+  height: auto;
+  width: auto;
+  position:relative;
+  text-align:center
+}
+
+#update-feed:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: $border;
+  transform: translate(-50%);
+}

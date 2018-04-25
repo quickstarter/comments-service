@@ -1,0 +1,73 @@
+$buttonColor: rgb(221, 221, 221);
+$border: 1px solid rgb(235, 235, 235);
+
+.update-post-view {
+    width: 60%;
+}
+
+.update-post-date {
+    text-align: right;
+    font-weight: normal;
+}
+
+.update-post-title {
+    padding-bottom: 10px;
+}
+
+.comments-like-bar {
+    height: 24px;
+    width: 100%;
+}
+
+.like-button {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    width: 60px;
+    font-size: 14px;
+}
+
+.like-button:hover {
+    .heart {
+        color: red;
+        font-size: 15px;
+        height: 15px;
+        width: 60px;
+    }
+}
+
+.bottom-like-bar {
+    height: 22px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.bottom-like {
+    background-color: $buttonColor;
+}
+
+.previous-next-update-bar {
+    padding-bottom: 65px;
+    padding-top: 40px;
+    height: 22px;
+    #previous, #next{
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        height: 34px;
+        width: 180px;
+        background-color: $buttonColor;
+        font-weight: bold;
+    }
+    #next {
+        float: right;
+    }
+}
+
+.border {
+    border-top: $border;
+    border-bottom: $border;
+}
+
+

@@ -1,0 +1,81 @@
+$buttonColor: rgb(221, 221, 221);
+$border: 1px solid rgb(218, 216, 216);
+
+
+.login-comments-box {
+    display: flex;
+    margin-bottom: 30px;
+    .comments-login-box {
+        justify-content: flex-start;
+        width: 70%;
+        margin-right: 40px;
+        text-align: center;
+        background-color: $buttonColor;
+    }
+    .right-side-comments-box {
+        border-left: solid $buttonColor;
+        padding-left: 20px;
+        justify-content: flex-end;
+        width: 30%;
+    }
+    .log-in-button {
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        height: 20px;
+        width: 60px;
+        font-size: 12px;
+        text-decoration: underline;    
+        background-color: $buttonColor;
+    }
+    .faq-button {
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        width: auto;
+        font-size: 12px;
+        text-decoration: underline;    
+    }
+}
+
+.login-box {
+    font-weight: normal;
+    font-size: 22px;
+    background-color: $buttonColor;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 30px;
+    .log-in-button {
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        height: 20px;
+        width: 60px;
+        font-size: 15px;
+        text-decoration: underline;    
+        background-color: $buttonColor;
+    }
+}
+
+.update-post-comment-item {
+    height: 100px;
+    .comment-avatar {
+        float: left;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+    }
+    .username-date-bar {
+        height: 20px;
+    }
+    .comment-username {
+        font-weight: bold;
+    }
+    .comment-date {
+        font-size: 13px;
+    }
+    .comment-body {
+        float: left;
+    }
+}
