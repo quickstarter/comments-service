@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://localhost/UpdatesAndComments';
+//const mongoDB = 'mongodb://localhost/UpdatesAndComments';
+const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
+
 mongoose.connect(mongoDB);
 
 mongoose.Promise = global.Promise;

@@ -56,7 +56,7 @@ class App extends React.Component {
 
     componentDidMount() {
         const context = this;
-        axios.get('http://127.0.0.1:3004/api/updates/44')
+        axios.get('http://ec2-18-217-165-131.us-east-2.compute.amazonaws.com/api/updates/33')
             .then((response) => {
                 console.log(response.data[0])
                 context.setState({
