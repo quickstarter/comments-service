@@ -8,8 +8,15 @@
 </head>
 
 <body>
-    <div id="Updates"></div>
+    <div id="Comments"></div>
     <script type="text/javascript" src="bundle.js"></script>
+    <script>
+        const project = window.location.href.split('?')[1];
+        ReactDOM.render(
+            React.createElement(Comments, { projectId: project }),
+            document.getElementById('Comments')
+        );
+    </script>
 </body>
 
 </html>

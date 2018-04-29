@@ -4,11 +4,11 @@ import Updates from './Updates.jsx';
 import UpdatePostView from './UpdatePostView.jsx';
 import CommentsFeed from './CommentsFeed.jsx';
 
-
 class App extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            projectId: this.props.projectId || 0,
             view: 'comments',
             createdAt: null,
             updateView: {
@@ -56,9 +56,8 @@ class App extends React.Component {
 
     componentDidMount() {
         const context = this;
-        axios.get('http://ec2-18-217-165-131.us-east-2.compute.amazonaws.com/api/updates/33')
+        axios.get(`ec2-18-217-165-131.us-east-2.compute.amazonaws.com/api/updates/${context.state.projectId}`)
             .then((response) => {
-                console.log(response.data[0])
                 context.setState({
                     createdAt: response.data[0].createdAt,
                     updates: response.data[0].updates,
@@ -88,7 +87,7 @@ class App extends React.Component {
                     <span className="updates" onClick={() => this.changeView('updates')}>Updates </span>
                     <span className="comments" onClick={() => this.changeView('comments')}> Comments</span>
                 </div> */}
-                <div className="main">
+                <div className="comments-main">
                     {this.renderView()}
                 </div>
             </div>
