@@ -1,9 +1,9 @@
 const faker = require('faker');
-const db = require('./db.js');
-
+const fs = require('fs');
+var i = 1;
 const projects = [];
 
-for (let i = 1; i <= 100; i++) {
+const generateOneObject = () => {
   const project = {};
   project.id = i;
   project.createdAt = faker.date.past();
@@ -12,77 +12,29 @@ for (let i = 1; i <= 100; i++) {
     body: faker.lorem.paragraphs(),
     date: faker.date.past(),
     likes: faker.random.number(),
-    comments: [{
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }, {
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }],
-  }, {
-    title: faker.random.words(),
-    body: faker.lorem.paragraphs(),
-    date: faker.date.past(),
-    likes: faker.random.number(),
-    comments: [{
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }, {
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }],
-  }, {
-    title: faker.random.words(),
-    body: faker.lorem.paragraphs(),
-    date: faker.date.past(),
-    likes: faker.random.number(),
-    comments: [{
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }, {
-      userId: faker.random.number(),
-      avatar: faker.image.avatar(),
-      username: faker.internet.userName(),
-      date: faker.date.recent(),
-      body: faker.lorem.sentence(),
-    }],
+    comments: fiveComments(),
   }];
-  project.comments = [{
-    userId: faker.random.number(),
-    avatar: faker.image.avatar(),
-    username: faker.internet.userName(),
-    date: faker.date.recent(),
-    body: faker.random.words(),
-  }, {
-    userId: faker.random.number(),
-    avatar: faker.image.avatar(),
-    username: faker.internet.userName(),
-    date: faker.date.recent(),
-    body: faker.random.words(),
-  }, {
-    userId: faker.random.number(),
-    avatar: faker.image.avatar(),
-    username: faker.internet.userName(),
-    date: faker.date.recent(),
-    body: faker.random.words(),
-  }];
-  projects.push(project);
+  project.comments= fiveComments();
+  i++;
+  return project;
 }
+
+const createOneComment = () =>{
+  return {
+    userId: faker.random.number(),
+    avatar: faker.image.avatar(),
+    username: faker.internet.userName(),
+    date: faker.date.recent(),
+    body: faker.lorem.sentence(),
+  }
+}
+
+const fiveComments = () =>{
+  let comment = []
+  for (let i=0; i<5; i++){
+    comment.push(createOneComment())
+  }
+} 
 
 var defaultData = {
   id: 0,
@@ -187,27 +139,38 @@ var defaultData = {
   comments: []
 }
 
+// projects.unshift(defaultData);
 
-var commentsArray = [];
-//faker to create fake comments (51 comments)
-for (var i = 0; i < 51; i++) {
-  var fakeComment = {
-    userId: faker.random.number(),
-    avatar: faker.image.avatar(),
-    username: faker.internet.userName(),
-    date: faker.date.recent(),
-    body: faker.random.words(),
-  }
-  commentsArray.push(fakeComment);
-}
-
-defaultData.comments = commentsArray;
-
-projects.unshift(defaultData);
-
-const insertProjects = () => {
-  db.UpdatesAndComments.create(projects);
+const writeOneTable = function writeOneTable(dataNumber, stream, dataGen) {
+  let loop = dataNumber;
+  const writer = function writer() {
+    let ok = true;
+    do {
+      loop--;
+      if (loop === 0) {
+        stream.write(JSON.stringify(dataGen(loop)), 'utf8');
+      } else {
+        ok = stream.write(JSON.stringify(dataGen(loop)), 'utf8');
+      }
+    } while (loop > 0 && ok);
+    if (loop > 0) {
+      stream.once('drain', writer);
+    }
+  };
+  writer();
 };
 
-insertProjects();
+const createTestFile = function createTestFile(filename, dataGen) {
+  const stream = fs.createWriteStream(filename, { flags: 'a' });
+  writeOneTable(10, stream, dataGen);
+  stream.on('finish', () => stream.end());
+};
 
+createTestFile('database/small.txt', generateOneObject);
+// const createTestDataSet = function createTestDataSet() {
+//   createTestFile('seed/testRecipe.txt', recipeRow);
+//   createTestFile('seed/testTools.txt', toolRow);
+//   createTestFile('seed/testJoin.txt', joinRow);
+// };
+
+// createTestDataSet();
