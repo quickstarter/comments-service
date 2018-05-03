@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-//const mongoDB = 'mongodb://localhost/UpdatesAndComments';
-const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
+const mongoDB = 'mongodb://localhost/UpdatesAndComments';
+// const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
 mongoose.connect(mongoDB);
 
 mongoose.Promise = global.Promise;
@@ -14,7 +14,11 @@ db.once('open', () => {
 });
 
 const updatesCommentsSchema = new mongoose.Schema({
-  id: Number,
+  id: {
+    type: Number,
+    index: true,
+    unique: true,
+  }, 
   createdAt: Date,
   updates: [{
     title: String,
@@ -40,16 +44,16 @@ const updatesCommentsSchema = new mongoose.Schema({
 
 const UpdatesAndComments = mongoose.model('UpdatesComments', updatesCommentsSchema);
 
-const loadProject = (projectId, callback) => {
-  // should find project id and call callback on project returned from DB
-  UpdatesAndComments
-    .find({ id: projectId })
-    .exec(callback);
-};
+// const loadProject = (projectId, callback) => {
+//   // should find project id and call callback on project returned from DB
+//   UpdatesAndComments
+//     .find({ id: projectId })
+//     .exec(callback);
+// };
 
-// db method test
-// loadProject(0, (err, res) => {console.log(res)});
+// // db method test
+// // loadProject(0, (err, res) => {console.log(res)});
 
-module.exports.db = db;
-module.exports.UpdatesAndComments = UpdatesAndComments;
-module.exports.loadProject = loadProject;
+// module.exports.db = db;
+// module.exports.UpdatesAndComments = UpdatesAndComments;
+// module.exports.loadProject = loadProject;

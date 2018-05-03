@@ -1,23 +1,8 @@
 const faker = require('faker');
 const fs = require('fs');
 var i = 1;
-const projects = [];
+// const projects = [];
 
-const generateOneObject = () => {
-  const project = {};
-  project.id = i;
-  project.createdAt = faker.date.past();
-  project.updates = [{
-    title: faker.random.words(),
-    body: faker.lorem.paragraphs(),
-    date: faker.date.past(),
-    likes: faker.random.number(),
-    comments: fiveComments(),
-  }];
-  project.comments= fiveComments();
-  i++;
-  return project;
-}
 
 const createOneComment = () =>{
   return {
@@ -29,12 +14,31 @@ const createOneComment = () =>{
   }
 }
 
-const fiveComments = () =>{
+const multipleComments = () => {
   let comment = []
-  for (let i=0; i<5; i++){
+  const number = Math.floor((Math.random() * 8))
+  for (let i=0; i<number; i++){
     comment.push(createOneComment())
   }
+  return comment
 } 
+
+const generateOneObject = () => {
+  const project = {};
+  project.id = i;
+  project.createdAt = faker.date.past();
+  project.updates = [{
+    title: faker.random.words(),
+    body: faker.lorem.paragraphs(),
+    date: faker.date.past(),
+    likes: faker.random.number(),
+    comments: multipleComments(),
+  }];
+  project.comments = multipleComments();
+  i++;
+  return project;
+}
+
 
 var defaultData = {
   id: 0,
@@ -141,32 +145,53 @@ var defaultData = {
 
 // projects.unshift(defaultData);
 
-const writeOneTable = function writeOneTable(dataNumber, stream, dataGen) {
-  let loop = dataNumber;
-  const writer = function writer() {
-    let ok = true;
-    do {
-      loop--;
-      if (loop === 0) {
-        stream.write(JSON.stringify(dataGen(loop)), 'utf8');
-      } else {
-        ok = stream.write(JSON.stringify(dataGen(loop)), 'utf8');
+// const writeOneTable = function writeOneTable(dataNumber, stream, dataGen) {
+//   let loop = dataNumber;
+//   const writer = function writer() {
+//     let ok = true;
+//     do {
+//       loop--;
+//       if (loop === 0) {
+//         stream.write(JSON.stringify(dataGen(loop)), 'utf8');
+//       } else {
+//         ok = stream.write(JSON.stringify(dataGen(loop)), 'utf8');
+//       }
+//     } while (loop > 0 && ok);
+//     if (loop > 0) {
+//       stream.once('drain', writer);
+//     }
+//   };
+//   writer();
+// };
+
+// const createTestFile = function createTestFile(filename, dataGen) {
+//   console.time('seeding')
+//   const stream = fs.createWriteStream(filename, { flags: 'a' });
+//   writeOneTable(10000000, stream, dataGen);
+//   console.timeEnd('seeding');
+//   stream.on('finish', () => stream.end());
+// };
+const createTestFile = function createTestFile(filename, dataGen){
+  let loop = 1;
+  projects = [];
+  console.time('seeding');
+  while(loop<10000000){
+    projects.push(JSON.stringify(dataGen()))
+    if (i % 2000 === 0) {
+      let num = loop<2500000 ? 1 : (loop<5000000 ? 2 : (loop<7500000 ? 3 : 4));
+      fs.appendFileSync(`${filename}${num}.json`, `${projects.join('\n')}\n`);
+      projects = [];
+      process.stdout.write('.');
+      if (i % 50000 === 0) {
+        console.log(i);
       }
-    } while (loop > 0 && ok);
-    if (loop > 0) {
-      stream.once('drain', writer);
     }
-  };
-  writer();
-};
+    loop++;
+  }
+  console.timeEnd('seeding');
+}
 
-const createTestFile = function createTestFile(filename, dataGen) {
-  const stream = fs.createWriteStream(filename, { flags: 'a' });
-  writeOneTable(10, stream, dataGen);
-  stream.on('finish', () => stream.end());
-};
-
-createTestFile('database/small.txt', generateOneObject);
+createTestFile('database/test', generateOneObject);
 // const createTestDataSet = function createTestDataSet() {
 //   createTestFile('seed/testRecipe.txt', recipeRow);
 //   createTestFile('seed/testTools.txt', toolRow);
