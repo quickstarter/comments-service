@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://localhost/UpdatesAndComments';
+const mongoDB = 'mongodb://localhost/quickstarter';
 // const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
 mongoose.connect(mongoDB);
 
@@ -10,7 +10,7 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
-  console.log('connected to mongo!!!');
+  console.log('connected to mongo');
 });
 
 const updatesCommentsSchema = new mongoose.Schema({
@@ -42,7 +42,7 @@ const updatesCommentsSchema = new mongoose.Schema({
   }],
 });
 
-const UpdatesAndComments = mongoose.model('UpdatesComments', updatesCommentsSchema);
+const UpdatesAndComments = mongoose.model('UpdatesAndComments', updatesCommentsSchema);
 
 // const loadProject = (projectId, callback) => {
 //   // should find project id and call callback on project returned from DB

@@ -1,3 +1,7 @@
 node_modules
 client/dist/bundle.js
-database/test.txt
+database/mongoDB/test1.json
+database/mongoDB/test2.json
+database/mongoDB/test3.json
+database/mongoDB/test4.json
+database/mongoDB/small.txt

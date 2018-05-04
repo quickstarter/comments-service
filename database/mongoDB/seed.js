@@ -20,20 +20,30 @@ const multipleComments = () => {
   for (let i=0; i<number; i++){
     comment.push(createOneComment())
   }
-  return comment
+  return comment;
 } 
+
+const multipleUpdates = () => {
+  let updates = []
+  const number = Math.floor((Math.random() * 8))
+  for (let i=0; i<number; i++){
+    comment.push({
+      title: faker.random.words(),
+      body: faker.lorem.paragraphs(),
+      date: faker.date.past(),
+      likes: faker.random.number(),
+      comments: multipleComments(),
+    })
+  }
+  return updates
+}
+
 
 const generateOneObject = () => {
   const project = {};
   project.id = i;
   project.createdAt = faker.date.past();
-  project.updates = [{
-    title: faker.random.words(),
-    body: faker.lorem.paragraphs(),
-    date: faker.date.past(),
-    likes: faker.random.number(),
-    comments: multipleComments(),
-  }];
+  project.updates = multipleUpdates();
   project.comments = multipleComments();
   i++;
   return project;
