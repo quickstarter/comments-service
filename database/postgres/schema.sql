@@ -12,7 +12,7 @@ CREATE TABLE projects (
 CREATE TABLE updates (
   id integer NOT NULL  PRIMARY KEY,
   title varchar(255),
-  body text[],
+  body text,
   createdAt timestamp with time zone,
   likes integer,
   project_id integer REFERENCES projects(id)
@@ -25,7 +25,7 @@ CREATE TABLE updateComments(
   avatar varchar(1024),
   username varchar(255),
   createdAt timestamp with time zone,
-  body text[],
+  body text,
   update_id integer REFERENCES updates(id)
 );
 
@@ -36,6 +36,6 @@ CREATE TABLE projectComments(
   avatar varchar(1024),
   username varchar(255),
   createdAt timestamp with time zone,
-  body text[],
+  body text,
   project_id integer REFERENCES projects(id)
 );
