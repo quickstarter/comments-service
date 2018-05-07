@@ -1,11 +1,5 @@
 node_modules
 client/dist/bundle.js
-database/mongoDB/test1.json
-database/mongoDB/test2.json
-database/mongoDB/test3.json
-database/mongoDB/test4.json
-database/mongoDB/small.txt
-database/postgres/projects.csv
-database/postgres/projectComments.csv
-database/postgres/updates.csv
-database/postgres/updateComments.csv
+database/mongoDB/seedFiles
+database/postgres/seedFiles
+
