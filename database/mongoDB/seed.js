@@ -1,7 +1,6 @@
 const faker = require('faker');
 const fs = require('fs');
 var i = 1;
-// const projects = [];
 
 
 const createOneComment = () =>{
@@ -153,34 +152,6 @@ var defaultData = {
   comments: []
 }
 
-// projects.unshift(defaultData);
-
-// const writeOneTable = function writeOneTable(dataNumber, stream, dataGen) {
-//   let loop = dataNumber;
-//   const writer = function writer() {
-//     let ok = true;
-//     do {
-//       loop--;
-//       if (loop === 0) {
-//         stream.write(JSON.stringify(dataGen(loop)), 'utf8');
-//       } else {
-//         ok = stream.write(JSON.stringify(dataGen(loop)), 'utf8');
-//       }
-//     } while (loop > 0 && ok);
-//     if (loop > 0) {
-//       stream.once('drain', writer);
-//     }
-//   };
-//   writer();
-// };
-
-// const createTestFile = function createTestFile(filename, dataGen) {
-//   console.time('seeding')
-//   const stream = fs.createWriteStream(filename, { flags: 'a' });
-//   writeOneTable(10000000, stream, dataGen);
-//   console.timeEnd('seeding');
-//   stream.on('finish', () => stream.end());
-// };
 const createTestFile = function createTestFile(filename, dataGen){
   let loop = 1;
   projects = [];
@@ -201,11 +172,5 @@ const createTestFile = function createTestFile(filename, dataGen){
   console.timeEnd('seeding');
 }
 
-createTestFile('database/test', generateOneObject);
-// const createTestDataSet = function createTestDataSet() {
-//   createTestFile('seed/testRecipe.txt', recipeRow);
-//   createTestFile('seed/testTools.txt', toolRow);
-//   createTestFile('seed/testJoin.txt', joinRow);
-// };
+createTestFile('database/mongoDB/seedFiles/testData', generateOneObject);
 
-// createTestDataSet();
