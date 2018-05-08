@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../database/db.js');
+const db = require('../database/mongoDB/db.js');
 const cors = require('cors');
 
 const app = express();

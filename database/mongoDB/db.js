@@ -42,18 +42,19 @@ const updatesCommentsSchema = new mongoose.Schema({
   }],
 });
 
-const UpdatesAndComments = mongoose.model('UpdatesAndComments', updatesCommentsSchema);
+const UpdatesAndComments = mongoose.model('UpdatesAndComment', updatesCommentsSchema);
 
-// const loadProject = (projectId, callback) => {
-//   // should find project id and call callback on project returned from DB
-//   UpdatesAndComments
-//     .find({ id: projectId })
-//     .exec(callback);
-// };
+const loadProject = (projectId, callback) => {
+  console.log(projectId);
+  // should find project id and call callback on project returned from DB
+  UpdatesAndComments
+    .find({ id: projectId })
+    .exec(callback);
+};
 
 // // db method test
 // // loadProject(0, (err, res) => {console.log(res)});
 
-// module.exports.db = db;
-// module.exports.UpdatesAndComments = UpdatesAndComments;
-// module.exports.loadProject = loadProject;
+module.exports.db = db;
+module.exports.UpdatesAndComments = UpdatesAndComments;
+module.exports.loadProject = loadProject;
