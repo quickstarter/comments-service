@@ -42,7 +42,7 @@ const updatesCommentsSchema = new mongoose.Schema({
   }],
 });
 
-const UpdatesAndComments = mongoose.model('UpdatesAndComments', updatesCommentsSchema);
+const UpdatesAndComments = mongoose.model('UpdatesAndComment', updatesCommentsSchema);
 
 const loadProject = (projectId, callback) => {
   // should find project id and call callback on project returned from DB
@@ -50,6 +50,7 @@ const loadProject = (projectId, callback) => {
     .find({ id: projectId })
     .exec(callback);
 };
+
 
 
 module.exports.db = db;
