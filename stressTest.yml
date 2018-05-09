@@ -1,0 +1,19 @@
+config:
+  target:  "http://localhost:3005"
+  phases:
+    - duration: 120
+      arrivalRate: 10
+  variables:
+    id:
+      - 1
+  # processor: "./artilleryScripts.js"
+scenarios:
+  - flow:
+    - loop:
+      - get:
+          url: "/api/updates/{{ $randomNumber(1,10000000) }}"
+      count: 50
+      
+      
+
+    

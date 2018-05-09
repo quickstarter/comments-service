@@ -3,3 +3,6 @@ client/dist/bundle.js
 database/mongoDB/seedFiles
 database/postgres/seedFiles
 
+.config.js
+newrelic_agent.log
+
