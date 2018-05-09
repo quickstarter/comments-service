@@ -1,9 +1,10 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database/mongoDB/db.js');
 const cors = require('cors');
-
+const { cacheGetProject } = require('../database/mongoDB/redis.js');
 const app = express();
 const port = 3005;
 
@@ -13,15 +14,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 app.get('/api/updates/:id', (req, res) => {
-  db.loadProject(req.params.id, (err, project) => {
+  cacheGetProject(req.params.id, (err, project) => {
     if (err) {
       console.log('ERROR LOADING PROJECT', err);
+      res.status('400')
+      res.send(err)
     } else {
-      res.json(project);
+      project = (typeof project === 'string') ? project : JSON.stringify(project); 
+      res.send(project);
     }
   });
 });
 
+
+// app.post('/api/updates/:id', (req,res) => {
+//   db.saveComment(req)
+// }
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });

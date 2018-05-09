@@ -10,7 +10,7 @@
   "scripts": {
     "css": "node-sass client/src/styles.scss -o client/dist",
     "css:watch": "npm run css && node-sass client/src/styles.scss -wo client/dist",
-    "start": "node database/seed.js & node server/server.js",
+    "start": "node server/server.js",
     "dev:react": "webpack -d --watch",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -29,7 +29,8 @@
     "pg": "^7.4.2",
     "pg-copy-streams": "^1.2.0",
     "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react-dom": "^16.3.1",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -43,6 +44,7 @@
     "enzyme-to-json": "^3.3.3",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^22.4.3",
+    "newrelic": "^4.1.0",
     "node-sass": "^4.8.3",
     "react-test-renderer": "^16.3.2",
     "webpack": "^2.2.1"
