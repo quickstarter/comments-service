@@ -1,10 +1,9 @@
 const { loadProject } = require('./db.js');
 
-var redisClient = require('redis').createClient;
+const redisClient = require('redis').createClient;
 
-// const db = require('./db.js');
-var hits = 0;
-var total = 0;
+let hitCount = 0;
+let totalCount = 0;
 
 const redis = redisClient(6379, 'localhost');
 const cacheGetProject =  function(id, cb){
@@ -12,15 +11,19 @@ const cacheGetProject =  function(id, cb){
     total ++;
     if (total%1000 === 0){ console.log(hits/total)}
 
-    if (redisErr) cb(redisErr);
+    if (redisErr) cb(redisErr,null, 500);
     else if (reply){
       hits++;
-      cb(null, reply);
+      cb(null, reply, 200);
     } else {
       loadProject(id, (err, reply)=>{
-        redis.set(id, JSON.stringify(reply), function () {
-          cb(err, reply);
-        });
+        if (err){
+          cb(err,'', 500);
+        } else {
+          redis.set(id, JSON.stringify(reply), function () {
+            cb(err, reply);
+         })
+        };
       });
     };
   })

@@ -14,10 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 app.get('/api/updates/:id', (req, res) => {
-  cacheGetProject(req.params.id, (err, project) => {
+  cacheGetProject(req.params.id, (err, project, status) => {
     if (err) {
-      console.log('ERROR LOADING PROJECT', err);
-      res.status('400')
+      res.status(status)
       res.send(err)
     } else {
       project = (typeof project === 'string') ? project : JSON.stringify(project); 

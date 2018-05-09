@@ -1,5 +1,5 @@
 var API_KEY = require('./.config.js');
-//console.log(API_KEY)
+
 'use strict'
 /**
  * New Relic agent configuration.
