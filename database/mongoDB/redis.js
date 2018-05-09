@@ -8,12 +8,12 @@ let totalCount = 0;
 const redis = redisClient(6379, 'localhost');
 const cacheGetProject =  function(id, cb){
   redis.get(id, (redisErr, reply) => {
-    total ++;
-    if (total%1000 === 0){ console.log(hits/total)}
+    totalCount ++;
+    if (totalCount%1000 === 0){ console.log(hitCount/totalCount)}
 
     if (redisErr) cb(redisErr,null, 500);
     else if (reply){
-      hits++;
+      hitCount++;
       cb(null, reply, 200);
     } else {
       loadProject(id, (err, reply)=>{
