@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://localhost/quickstarter';
+const mongoDB = 'mongodb://localhost:27018';
 // const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
 mongoose.connect(mongoDB);
 
