@@ -6,5 +6,5 @@ window.React = React;
 window.ReactDOM = ReactDOM;
 window.Comments = App;
 
-//ReactDOM.render(<App />, document.getElementById('Comments'));
+ReactDOM.render(<App />, document.getElementById('Comments'));
 
