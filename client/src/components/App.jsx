@@ -3,6 +3,8 @@ import axios from 'axios';
 import Updates from './Updates.jsx';
 import UpdatePostView from './UpdatePostView.jsx';
 import CommentsFeed from './CommentsFeed.jsx';
+import styles from '../styles.css'
+
 
 class App extends React.Component {
     constructor(props) {
@@ -54,12 +56,12 @@ class App extends React.Component {
         })
     }
 
-    componentDidMount() {
+    componentDidMount(){
         const context = this;
         // axios.get(`http://ec2-18-216-228-30.us-east-2.compute.amazonaws.com/api/updates/${context.state.projectId}`)
         axios.get(`http://localhost:3005/api/updates/${context.state.projectId}`)
             .then((response) => {
-                context.setState({
+                context.setState( {
                     createdAt: response.data[0].createdAt,
                     updates: response.data[0].updates,
                     comments: response.data[0].comments
@@ -84,10 +86,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                {/* <div className="nav">
-                    <span className="updates" onClick={() => this.changeView('updates')}>Updates </span>
-                    <span className="comments" onClick={() => this.changeView('comments')}> Comments</span>
-                </div> */}
+            <style> {styles.toString()} </style>
                 <div className="comments-main">
                     {this.renderView()}
                 </div>

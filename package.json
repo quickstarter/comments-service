@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "css": "node-sass client/src/styles.scss -o client/dist",
+    "css": "node-sass client/src/styles.scss -o client/src",
     "css:watch": "npm run css && node-sass client/src/styles.scss -wo client/dist",
     "start": "node server/server.js",
     "dev:react": "webpack -d --watch",
@@ -43,6 +43,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",
@@ -51,6 +52,8 @@
     "newrelic": "^4.1.0",
     "node-sass": "^4.9.0",
     "react-test-renderer": "^16.3.2",
+    "style-loader": "^0.21.0",
+    "to-string-loader": "^1.1.5",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.1.3"
   },

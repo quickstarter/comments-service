@@ -20,13 +20,21 @@ module.exports = [{
           presets: ['react', 'es2015'],
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          'to-string-loader',
+          'css-loader'
+        ]
+    },
     ],
   },
 },
 {
   entry: `${SRC_DIR}/serverIndex.jsx`,
-
+  // target: 'node',
   output: {
+   
     filename: 'bundleServer.js',
     path: DEST_DIR,
     library: 'test',
@@ -44,7 +52,14 @@ module.exports = [{
             presets: ['react', 'es2015'],
           },
       },
-    }
+    },
+    {
+        test: /\.css$/,
+        use: [
+          'to-string-loader',
+          'css-loader'
+        ]
+    },
     ],
   },
 }
