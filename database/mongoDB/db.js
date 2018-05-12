@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://localhost/quickstarter';
+const mongoDB = 'mongodb://localhost:27018/quickstarter';
 // const mongoDB = 'mongodb://172.17.0.2/UpdatesAndComments';
 mongoose.connect(mongoDB);
 
@@ -16,8 +16,6 @@ db.once('open', () => {
 const updatesCommentsSchema = new mongoose.Schema({
   id: {
     type: Number,
-    index: true,
-    unique: true,
   }, 
   createdAt: Date,
   updates: [{

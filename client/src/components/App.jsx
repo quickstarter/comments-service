@@ -56,7 +56,8 @@ class App extends React.Component {
 
     componentDidMount() {
         const context = this;
-        axios.get(`http://ec2-18-216-228-30.us-east-2.compute.amazonaws.com/api/updates/${context.state.projectId}`)
+        // axios.get(`http://ec2-18-216-228-30.us-east-2.compute.amazonaws.com/api/updates/${context.state.projectId}`)
+        axios.get(`http://localhost:3005/api/updates/${context.state.projectId}`)
             .then((response) => {
                 context.setState({
                     createdAt: response.data[0].createdAt,

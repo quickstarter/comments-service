@@ -11,7 +11,7 @@ module.exports = [{
     path: DEST_DIR,
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?/,
         include: SRC_DIR,
@@ -25,21 +25,26 @@ module.exports = [{
 },
 {
   entry: `${SRC_DIR}/serverIndex.jsx`,
-  target: 'node',
+
   output: {
     filename: 'bundleServer.js',
     path: DEST_DIR,
+    library: 'test',
+    libraryExport: 'default',
+    libraryTarget: 'commonjs2'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?/,
         include: SRC_DIR,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015'],
-        },
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['react', 'es2015'],
+          },
       },
+    }
     ],
   },
 }
