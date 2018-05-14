@@ -1,5 +1,6 @@
 node_modules
-client/dist/bundle.js
+client/dist/bundleClient.js
+client/dist/bundleServer.js
 database/mongoDB/seedFiles
 database/postgres/seedFiles
 
