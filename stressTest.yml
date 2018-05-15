@@ -8,11 +8,27 @@ config:
       - 1
   # processor: "./artilleryScripts.js"
 scenarios:
-  - flow:
-    - loop:
-      - get:
-          url: "/api/updates/{{ $randomNumber(1,10000000) }}"
-      count: 50
+  - name: 'popular'
+    weight: 7
+    flow:
+      - loop:
+        - get:
+            url: "/api/updates/{{ $randomNumber(9000000,10000000) }}"
+        count: 50
+  - name: 'unpopular'
+    weight: 2
+    flow:
+      - loop:
+        - get:
+            url: "/api/updates/{{ $randomNumber(2000000,10000000) }}"
+        count: 50  
+   - name: 'super unpopular'
+    weight: 1
+    flow:
+      - loop:
+        - get:
+            url: "/api/updates/{{ $randomNumber(0,10000000) }}"
+        count: 50  
       
       
 
